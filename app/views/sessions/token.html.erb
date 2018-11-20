@@ -1,0 +1,35 @@
+<% if session[:access_token] %>
+    <h1>Authorization point </h1>
+
+    <h3>Authorization code </h3>
+    <p><%= @code   %>
+
+    <h3>Access Token</h3>
+    <p><%= @access_token_auth %></p>
+
+    <h3>Id Token</h3>
+    <p><%= @id_token_auth %></p>
+
+
+
+    <h1>Token point </h1>
+
+
+    <h3>Access Token</h3>
+    <p><%= session[:access_token]  %></p>
+
+    <h3>ID Token</h3>
+    <p><%=  @id_token %></p>
+
+    <%= link_to 'Get User', "http://localhost:3000/api/user?access_token=#{session[:access_token]}" %>
+    <%= link_to 'Update User', "http://localhost:3000/api/user/update?access_token=#{session[:access_token]}" %>
+    <%= link_to 'Delete Session', session_delete_path, method: :delete %>
+<% else %>
+    <h1>Implicit</h1>
+    <%= link_to 'Authorize via token Keepa', new_oauth_token_path %><br/>
+    <%= link_to 'Authorize via token Keepa', new_oauth_token_path %><br/>
+    <h1>Hybride</h1>>
+    <%= link_to 'Authorize via code token Keepa', new_oauth_code_token_path %><br/>
+    <%= link_to 'Authorize via code id_token Keepa', new_oauth_code_id_token_path %><br/>
+    <%= link_to 'Authorize via code id_token token Keepa', new_oauth_code_id_token_token_path %>
+<% end %>
